@@ -1,117 +1,7 @@
 <html>
 <head>
   <title>Slap Me!</title>
-  <style>
-
-  .slp_commented:hover {
-    background: rgba(255, 0, 0, 0.2);
-    box-shadow: 0 0 5px 5px rgba(255, 0, 0, 0.2);
-
-  }
-
-  .slp_comment {
-    position: relative;
-    width: 100%;
-    height: 0;
-  }
-
-  .slp_comment .slp_token {
-    position: absolute;
-    left: 50%;
-    background: #C32525;
-    color: white;
-    padding: 10px;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    border: 3px solid white;
-    box-shadow: 0 0 1px 2px #D1D6DC;
-    cursor: pointer;
-  }
-
-
-  .slp_commented:hover>.slp_comment .slp_token {
-    background: #C32525;
-    box-shadow: 0 0 1px 2px #76899A;
-  }
-
-  .slp_popup {
-    cursor: default;
-    z-index: -1;
-    opacity: 0;
-    width: 300px;
-    box-shadow: 0 0 9px 2px grey;
-    background: white;
-    border-radius: 6px;
-    color: black;
-    position: absolute;
-    margin-left: -150px;
-    left: 50%;
-    text-align: left;
-    padding: 0 20px;
-    box-sizing: border-box;
-    top: 110%;
-    transition: opacity 0.2s ease, z-index 0.2s ease;
-  }
-
-  .slp_popup_visible {
-    opacity: 1;
-    z-index: 1000;
-  }
-
-  .slp_popup ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .slp_popup ul li {
-    font-size: 16px;
-    font-weight: normal;
-    margin: 20px 0
-  }
-
-  .slp_title {
-    line-height: 24px;
-  }
-
-  .slp_title strong {
-    display: block;
-  }
-
-  .slp_title span {
-    font-size: 0.7em;
-    color: grey;
-  }
-
-  .slp_title img {
-    float: left;
-    max-width: 48px;
-    max-height: 48px;
-    margin-right: 7px;
-  }
-
-  .slp_popup li textarea {
-    width: 100%;
-    font-family: arial;
-    border: solid 1px lightgrey;
-    padding: 4px;
-    border-radius: 4px;
-    transition: height 0.2s ease, margin-bottom 0.2s ease;
-    height: 80px;
-  }
-
-  .slp_popup li textarea:invalid {
-    height: 18px;
-  }
-
-  .slp_popup li textarea:focus {
-    height: 80px;
-  }
-
-  </style>
+  <link rel="stylesheet" href="test.css" />
 </head>
 <body>
   <h1>Slap me!</h1>
@@ -119,7 +9,7 @@
   Velit ipsum pariatur aliqua do dolor elit ut. Do irure laboris consectetur esse elit eiusmod mollit aute laboris esse eiusmod. Cupidatat anim non exercitation cillum eu eiusmod do sit ea amet occaecat elit culpa eiusmod. Mollit elit laboris ad quis consequat exercitation est laboris qui veniam qui. Laborum adipisicing velit deserunt minim deserunt pariatur esse. Mollit deserunt duis quis in Lorem laborum est et aliqua qui sunt adipisicing. Aliqua sit ullamco fugiat veniam laborum eu Lorem non velit eu aute proident reprehenderit ea. Cillum sint in qui qui ut fugiat.
 </p>
 <h2 class="slp_commented">
-  <div class="slp_comment">
+  <div class="slp_comment" data-slp-id="1234">
     <div class="slp_token">1
       <div class="slp_popup" id="slp_popup">
         <ul>
@@ -153,15 +43,7 @@
 </p>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script type="text/javascript">
-  $(function() {
-    $('.slp_token').on('click', function(e) {
-      if (e.target.className == 'slp_token') {
-        $(e.target).children('.slp_popup').toggleClass('slp_popup_visible');
-      }
-    });
-  })
-</script>
+<script type="text/javascript" src="test.js"></script>
 
 </body>
 </html>
