@@ -214,7 +214,7 @@ $(function() {
         html += '<img src="http://www.gravatar.com/avatar/' + hash + '" />';
       }
       html += '<strong>' + l.name + '</strong>' +
-              '<span>' + l.date + '</span>' +
+              '<span>' + l.date.toLocaleDateString() + ' ' + l.date.toLocaleTimeString() + '</span>' +
               '</div><div>' + l.text.replace('\n', '<br />') + '</div></li>'
     }
 
