@@ -40,7 +40,7 @@
   cursor: default;
   z-index: -1;
   opacity: 0;
-  width: 300px;
+  width: 350px;
   box-shadow: 0 0 9px 2px grey;
   background: white;
   border-radius: 6px;
@@ -49,7 +49,7 @@
   margin-left: -150px;
   left: 50%;
   text-align: left;
-  padding: 0 20px;
+  padding: 20px;
   box-sizing: border-box;
   top: 110%;
   transition: opacity 0.2s ease, z-index 0.2s ease;
@@ -69,11 +69,12 @@
 .slp_popup ul li {
   font-size: 16px;
   font-weight: normal;
-  margin: 20px 0
+  margin-bottom: 20px;
 }
 
 .slp_title {
   line-height: 24px;
+  font-size: 14px;
 }
 
 .slp_title strong {
@@ -81,7 +82,6 @@
 }
 
 .slp_title span {
-  font-size: 0.7em;
   color: grey;
 }
 
@@ -92,7 +92,8 @@
   margin-right: 7px;
 }
 
-.slp_popup li textarea {
+.slp_popup textarea {
+  resize: none;
   width: 100%;
   font-family: arial;
   border: solid 1px lightgrey;
@@ -103,10 +104,10 @@
   box-sizing: border-box;
 }
 
-.slp_popup li textarea:invalid {
+.slp_popup textarea:invalid {
   height: 28px;
 }
 
-.slp_popup li textarea:focus {
+.slp_popup textarea:focus {
   height: 80px;
 }
