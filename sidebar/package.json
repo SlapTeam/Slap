@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
+    "chalk": "^0.4.0",
     "grunt": "^0.4.1",
     "grunt-autoprefixer": "^0.7.3",
     "grunt-concurrent": "^0.5.0",
     "grunt-contrib-clean": "^0.5.0",
-    "grunt-contrib-compass": "^0.7.2",
+    "grunt-contrib-compass": "^1.0.1",
     "grunt-contrib-concat": "^0.4.0",
     "grunt-contrib-connect": "^0.7.1",
     "grunt-contrib-copy": "^0.5.0",
@@ -26,8 +27,7 @@
     "grunt-wiredep": "^1.7.0",
     "jshint-stylish": "^0.2.0",
     "load-grunt-tasks": "^0.4.0",
-    "time-grunt": "^0.3.1",
-    "chalk": "^0.4.0"
+    "time-grunt": "^0.3.1"
   },
   "engines": {
     "node": ">=0.10.0"
