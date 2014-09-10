@@ -201,9 +201,50 @@ var MD5 = function (string) {
 
 $(function() {
 
-  function addComment(c) {
+  function commentClick(e) {
+    var el = $(e.target);
+    if (el.hasClass('slp_commented')) {
+      el = el.children('slp_token');
+    }
+
+    if (el.hasClass('slp_token')) {
+      var popup = el.children('.slp_popup').get(0);
+
+      $('.slp_popup').each(function() {
+        if ($(this).get(0) == popup) {
+          $(popup).toggleClass('slp_popup_visible');
+        }
+        else {
+          $(this).removeClass('slp_popup_visible');
+        }
+      });
+    }
+
+    e.stopPropagation();
+  }
+
+  function keydownHandler(e) {
+    if (e.which == 13) {
+      if (e.ctrlKey) {
+        e.target.value += '\n';
+      }
+      else {
+        console.log('saving comment!', e.target.value);
+        $('.slp_popup').removeClass('slp_popup_visible');
+        e.target.value = '';
+        e.target.blur();
+      }
+      e.preventDefault();
+    }
+  }
+
+  function addComment(c, index, show) {
     var html = '<div class="slp_comment" data-slp-id="' + c.id + '">' +
-      '<div class="slp_token">' + (i + 1) + '<div class="slp_popup"><ul>';
+      '<div class="slp_token">' + (index + 1) + '<div class="slp_popup';
+
+    if(show) html += ' slp_popup_visible';
+
+    html += '"><ul>';
 
     for (var j = 0; j < c.comments.length; j++) {
       var l = c.comments[j];
@@ -217,52 +258,26 @@ $(function() {
               '</div><div>' + l.text.replace('\n', '<br />') + '</div></li>';
     }
 
-    html += '<li class="slp_new"><textarea required placeholder="type a reply here"></textarea></li>' +
+    html += '<li class="slp_new"><textarea required placeholder="comment here"></textarea></li>' +
             '</ul></div></div></div>';
 
-    $(c.selector).addClass('slp_commented');
-    $(c.selector).prepend(html);
+    var el = $(c.selector);
+
+    el.addClass('slp_commented');
+    el.prepend(html);
+    el.click(commentClick);
+    el.children('.slp_comment').find('.slp_popup li textarea').on('keydown', keydownHandler);
   };
 
   for (var i = 0; i < window.slapComments.length; i++) {
-    addComment(window.slapComments[i]);
+    addComment(window.slapComments[i], i);
   }
 
-  $('.slp_token').on('click', function(e) {
-
-    if (e.target.className == 'slp_token') {
-      var popup = $(e.target).children('.slp_popup').get(0);
-
-
-      $('.slp_popup').each(function() {
-        if ($(this).get(0) == popup) {
-          $(popup).toggleClass('slp_popup_visible');
-        }
-        else {
-          $(this).removeClass('slp_popup_visible');
-        }
-      });
-    }
-
-    e.stopPropagation();
-  });
-
-  $(document).click(function() {
+  $(document).click(function(e) {
     $('.slp_popup').removeClass('slp_popup_visible');
-  });
 
-  $('.slp_popup li textarea').on('keydown', function(e) {
-    if (e.which == 13) {
-      if (e.ctrlKey) {
-        e.target.value += '\n';
-      }
-      else {
-        console.log('saving comment!', e.target.value);
-        $('.slp_popup').removeClass('slp_popup_visible');
-        e.target.value = '';
-        e.target.blur();
-      }
-      e.preventDefault();
+    if (e.target.id) {
+      addComment({ selector: '#' + e.target.id, comments: []}, window.slapComments.length, true);
     }
   });
 })
