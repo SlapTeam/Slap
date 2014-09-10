@@ -200,9 +200,8 @@ var MD5 = function (string) {
 }
 
 $(function() {
-  for (var i = 0; i < window.slapComments.length; i++) {
-    var c = window.slapComments[i];
 
+  function addComment(c) {
     var html = '<div class="slp_comment" data-slp-id="' + c.id + '">' +
       '<div class="slp_token">' + (i + 1) + '<div class="slp_popup"><ul>';
 
@@ -215,22 +214,36 @@ $(function() {
       }
       html += '<strong>' + l.name + '</strong>' +
               '<span>' + l.date.toLocaleDateString() + ' ' + l.date.toLocaleTimeString() + '</span>' +
-              '</div><div>' + l.text.replace('\n', '<br />') + '</div></li>'
+              '</div><div>' + l.text.replace('\n', '<br />') + '</div></li>';
     }
 
-    html += '</ul></div></div></div>';
+    html += '<li class="slp_new"><textarea required placeholder="type a reply here"></textarea></li>' +
+            '</ul></div></div></div>';
 
     $(c.selector).addClass('slp_commented');
     $(c.selector).prepend(html);
+  };
+
+  for (var i = 0; i < window.slapComments.length; i++) {
+    addComment(window.slapComments[i]);
   }
 
   $('.slp_token').on('click', function(e) {
-    var add = false;
-    if (e.target.className == 'slp_token' && !$(e.target).children('.slp_popup').hasClass('slp_popup_visible')) {
-      add = true;
+
+    if (e.target.className == 'slp_token') {
+      var popup = $(e.target).children('.slp_popup').get(0);
+
+
+      $('.slp_popup').each(function() {
+        if ($(this).get(0) == popup) {
+          $(popup).toggleClass('slp_popup_visible');
+        }
+        else {
+          $(this).removeClass('slp_popup_visible');
+        }
+      });
     }
-    $('.slp_popup').removeClass('slp_popup_visible');
-    if (add) $(e.target).children('.slp_popup').addClass('slp_popup_visible');
+
     e.stopPropagation();
   });
 
