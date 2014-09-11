@@ -10,7 +10,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 		// initialize the interface
 		client = clients[tab.id] = new SlapClient(tab);
 		client.init(function() {
-			// display the menu once it's ready	
+			// display the menu once it's ready
 			client.toggle(true);
 		});
 	} else {
@@ -23,7 +23,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 chrome.runtime.onMessage.addListener(function(message, sender, respond){
 	if(!message || !message.context) return;
 
-	switch(message.type) { 
+	switch(message.type) {
 		case 'closemenu':
 		clients[message.context.tab].visible = false;
 		break;

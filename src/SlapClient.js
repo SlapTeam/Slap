@@ -2,6 +2,8 @@
 var clientJsFiles = [
 	'client/js/lib/jquery.min.js',
 	'client/js/lib/angular.min.js',
+	'client/js/lib/lodash.min.js',
+	'client/js/lib/md5.js',
 	'client/js/init.js',
 	'client/directives/menu/menu.js',
 	'client/directives/overlay/overlay.js',
@@ -11,7 +13,8 @@ var clientJsFiles = [
 
 // slap client styles
 var clientCssFiles = [
-	'client/css/menu.css'
+	'client/css/menu.css',
+	'client/css/comments.css'
 ];
 
 // slap client class
