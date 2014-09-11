@@ -1,0 +1,18 @@
+{
+  "name": "slap",
+  "version": "0.0.1",
+  "description": "A chrome extension for adding comments to web pages.",
+  "main": "",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Ventajou/Slap.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Ventajou/Slap/issues"
+  },
+  "homepage": "https://github.com/Ventajou/Slap"
+}

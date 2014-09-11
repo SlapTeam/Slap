@@ -1,0 +1,51 @@
+/* Styles for the extension slide out menu */
+
+.slap-menu {
+    top: 0;
+    width: 300px;
+    left: -300px;
+    height: 100%;
+    position: fixed;
+    z-index: 9999;
+    background-color: #67b5d1;
+    overflow: hidden;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.slap-menu.open {
+    left: 0
+}
+
+.slap-menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+
+.slap-menu li {
+    display: block;
+    text-align: center;
+    border-bottom: solid 1px #3184a1;
+    border-top: solid 1px #b5dbe9;
+}
+
+.slap-menu li:first-child {
+    border-top: none
+}
+
+.slap-menu li:last-child {
+    border-bottom: none
+}
+
+.slap-menu a {
+    font-weight: 300;
+    color: #fff;
+    display: block;
+    padding: 10px;
+    font-size: 18px;
+}
