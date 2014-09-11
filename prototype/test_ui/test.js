@@ -47,6 +47,7 @@ $(function() {
         }
         window.slapComments[selector].push(comment);
         addComment(selector, comment);
+        $(selector + ' > .slp_comment .slp_count').text(window.slapComments[selector].length);
         e.target.value = '';
         e.target.blur();
       }
@@ -64,12 +65,12 @@ $(function() {
             '<span>' + comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString() + '</span>' +
             '</div><div>' + comment.text.replace('\n', '<br />') + '</div></li>';
 
-    $(selector + ' ul').append(html);
+    $(selector + ' > .slp_comment ul').append(html);
   }
 
   function addThread(selector, comments, show) {
     var html = '<div class="slp_comment" data-slp-id="' + selector + '">' +
-      '<div class="slp_token">' + (comments.length || '?') + '<div class="slp_popup';
+      '<div class="slp_token"><span class="slp_count">' + (comments.length || '?') + '</span><div class="slp_popup';
 
     if(show) html += ' slp_popup_visible';
 
