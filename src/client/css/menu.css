@@ -44,11 +44,15 @@
 }
 
 .slap-menu a {
-    font-weight: 300;
     color: #fff;
     display: block;
     padding: 10px;
-    font-size: 18px;
+    font-size: 15px;
+}
+
+.slap-menu a.selected { 
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .slap-menu .slap-create { 
