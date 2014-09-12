@@ -10,6 +10,8 @@
             },
         	link: function ($scope, element, attrs) {
 
+						var threads = {};
+
 						function commentClick(e) {
 							var el = $(e.target);
 							if (el.hasClass('slp_commented')) {
@@ -51,7 +53,7 @@
 									}
 									$scope.selectedSlap[selector].push(comment);
 									addComment(selector, comment);
-									$(selector + ' > .slp_comment .slp_count').text($scope.selectedSlap[selector].length);
+									threads[selector].find('.slp_count').text($scope.selectedSlap[selector].length);
 									e.target.value = '';
 									e.target.blur();
 								}
@@ -69,7 +71,7 @@
 											'<span>' + comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString() + '</span>' +
 											'</div><div>' + comment.text.replace('\n', '<br />') + '</div></li>';
 
-							$(selector + ' > .slp_comment ul').append(html);
+							threads[selector].find('ul').append(html);
 						}
 
 						function addThread(selector, comments, show) {
@@ -84,14 +86,19 @@
 							var el = $(selector);
 
 							el.addClass('slp_commented');
-							el.prepend(html);
+							var pos = el.offset();
+							$(document.body).append(html);
+							thread = $(document.body).children().last();
+							threads[selector] = thread;
+							thread.click(commentClick);
+							thread.offset(position(selector));
 							el.click(commentClick);
-							$(selector + ' > .slp_comment textarea').on('keydown', keydownHandler);
+							thread.find('textarea').on('keydown', keydownHandler);
 
 							_.forEach(comments, function(c) { addComment(selector, c); });
 
 							if (show) {
-								el.find('.slp_comment textarea').focus();
+								thread.find('textarea').focus();
 							}
 						};
 
@@ -156,10 +163,30 @@
 							return path.join(' > ');
 						}
 
+						function position(selector) {
+							var el = $(selector);
+							var offset = el.offset();
+
+							return {
+								left: offset.left + el.width() / 2,
+								top: offset.top
+							};
+						}
+
 						$(document).click(function(e) {
+
+							if ($(e.target).closest('.slap-ui').length) return;
+
 							$('.slp_popup').removeClass('slp_popup_visible');
 
 							addThread(getPath(e.target), [], true);
+							e.preventDefault();
+						});
+
+						$(window).on('resize', function() {
+							_.forEach(threads, function(value, key) {
+								value.offset(position(key));
+							});
 						});
 
             $scope.$watch('selectedSlap', function(value) {

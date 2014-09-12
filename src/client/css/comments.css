@@ -4,13 +4,10 @@
 }
 
 .slp_comment {
-  position: relative;
-  width: 100%;
-  height: 0;
+  position: absolute;
 }
 
 .slp_comment .slp_token {
-  position: absolute;
   z-index: 1000;
   box-sizing: content-box;
   left: 50%;
