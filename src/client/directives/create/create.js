@@ -38,7 +38,7 @@
         return { 
             name: '',
             owner: user(),
-            pages: {}
+            pages: []
         };
     }
 

@@ -43,7 +43,7 @@
 			chrome.runtime.sendMessage({
             	type: "selectslap",
             	context: slap,
-            	value: (val ? val.id : null)
+            	value: (val ? val.$id : null)
             });
 		});
 
@@ -54,7 +54,7 @@
 			switch(request.type) {
 				case 'togglemenu': $scope.menuOpen = request.value; break;
 				case 'selectslap':
-					var target = _.find($scope.availableSlaps, {id: request.value});
+					var target = _.find($scope.availableSlaps, {"$id": request.value});
 					if(target) {
 						$scope.selectedSlap = target;
 						respond(request);
