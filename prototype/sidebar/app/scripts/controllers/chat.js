@@ -8,7 +8,7 @@
  */
 angular.module('sidebarApp')
   .controller('ChatCtrl', function ($scope, fbutil, $timeout) {
-    // synchronize a read-only, synchronized array of messages, limit to most recent 10 
+    // synchronize a read-only, synchronized array of messages, limit to most recent 10
     $scope.selectors = fbutil.syncObject('selectors');
 
     // display any errors
@@ -31,10 +31,10 @@ angular.module('sidebarApp')
         {
           $scope.selectors[selector].push({message : newMessage, name: name});
         }
-        
+
        else {
         $scope.selectors[selector] = [{message : newMessage, name: name}];
-        
+
        }
         $scope.selectors.$save();
         }
@@ -44,13 +44,13 @@ angular.module('sidebarApp')
 
 
    $scope.removeMessage = function(message, selector) {
-      
+
         // push a message to the end of the array
         var index = $scope.selectors[selector].indexOf(message);
         $scope.selectors[selector].splice(index, 1);
           // display any errors
-          
-      
+
+
     };
 
     function alert(msg) {

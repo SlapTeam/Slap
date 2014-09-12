@@ -17,6 +17,12 @@
 
 						function commentClick(e) {
 							var el = $(e.target);
+
+							if (el.closest('.slp_popup').length) {
+								e.stopPropagation();
+								return;
+							}
+
 							if (el.hasClass('slp_commented')) {
 								el = el.children('slp_token');
 							}
@@ -98,7 +104,7 @@
 								html += '<img src="http://www.gravatar.com/avatar/' + hash + '" />';
 							}
 							html += '<strong>' + (comment.email || 'Anonymous') + '</strong>' +
-											'<span>' + comment.date || '' + '</span>' +
+											'<span>' + (comment.date || '') + '</span>' +
 											'</div><div>' + comment.text.replace('\n', '<br />') + '</div></li>';
 
 							threads[selector].find('ul').append(html);
