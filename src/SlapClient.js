@@ -4,6 +4,9 @@ var clientJsFiles = [
 	'client/js/lib/angular.min.js',
 	'client/js/lib/lodash.min.js',
 	'client/js/lib/md5.js',
+	'client/js/lib/firebase.js',
+	'client/js/lib/firebase.utils.js',
+	'client/js/lib/config.js',
 	'client/js/init.js',
 	'client/directives/menu/menu.js',
 	'client/directives/overlay/overlay.js',
@@ -69,11 +72,11 @@ SlapClient.prototype = {
 		});
 	},
 
-	selectSlap: function(id) { 
-		chrome.tabs.sendMessage(this.tab.id, { 
+	selectSlap: function(id) {
+		chrome.tabs.sendMessage(this.tab.id, {
 			type: 'selectslap',
 			value: id
-		}, function(response) { 
+		}, function(response) {
 			client.selectedSlapId = response.value;
 		});
 	}

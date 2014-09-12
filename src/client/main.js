@@ -30,16 +30,16 @@
 		}];
 
 		$scope.createVisible = false;
-		$scope.showCreate = function() { 
+		$scope.showCreate = function() {
 			$scope.createVisible = true;
 		};
-		$scope.createSlap = function(slap) { 
+		$scope.createSlap = function(slap) {
 			// TODO: save it somewhere
 			$scope.selectedSlap = slap;
 		};
 
 		// watch for selected slap changes, to notify extension
-		$scope.$watch('selectedSlap', function(val) { 
+		$scope.$watch('selectedSlap', function(val) {
 			chrome.runtime.sendMessage({
             	type: "selectslap",
             	context: slap,
@@ -55,7 +55,7 @@
 				case 'togglemenu': $scope.menuOpen = request.value; break;
 				case 'selectslap':
 					var target = _.find($scope.availableSlaps, {id: request.value});
-					if(target) { 
+					if(target) {
 						$scope.selectedSlap = target;
 						respond(request);
 					} else response({value: null});
