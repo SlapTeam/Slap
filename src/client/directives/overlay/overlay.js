@@ -79,7 +79,7 @@
 										selectors = _.find($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; }).selectors;
 									}
 
-									if (!selectors[selector]) {
+									if (!_.find(selectors, function(s){return s.selector == selector;})) {
 										selectors.push({
 											selector: selector,
 											comments: []

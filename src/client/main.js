@@ -20,7 +20,7 @@
 		// watch for selected slap changes, to notify extension
 		var initialWatch = true;
 		$scope.$watch('selectedSlap', function(val) {
-			if(initialWatch) { 
+			if(initialWatch) {
 				initialWatch = false;
 				return;
 			}
