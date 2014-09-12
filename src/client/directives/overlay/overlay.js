@@ -179,8 +179,6 @@
 
 							$('.slp_popup').removeClass('slp_popup_visible');
 
-							addThread(getPath(e.target), [], true);
-							e.preventDefault();
 						});
 
 						$(window).on('resize', function() {
@@ -193,6 +191,22 @@
 								if (!value) $scope.selectedSlap = {};
                 _.forEach(value, function(value,key) { addThread(key, value, false); });
             });
+
+						function addClickHandler(e) {
+							if ($(e.target).closest('.slap-ui').length) return;
+
+							addThread(getPath(e.target), [], true);
+							e.preventDefault();
+							$(document).off('click', addClickHandler);
+							$scope.addingComment = false;
+							$scope.digest();
+						};
+
+						$scope.addingComment = false;
+						$scope.addComment = function() {
+							$scope.addingComment = true;
+							$(document).on('click', addClickHandler);
+						};
         	}
     	};
 	}]);
