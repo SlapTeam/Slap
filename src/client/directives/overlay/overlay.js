@@ -18,6 +18,8 @@
 								el = el.children('slp_token');
 							}
 
+							if (!el.hasClass('slp_token')) el = el.closest('.slp_token');
+
 							if (el.hasClass('slp_token')) {
 								var popup = el.children('.slp_popup').get(0);
 
@@ -199,7 +201,7 @@
 							e.preventDefault();
 							$(document).off('click', addClickHandler);
 							$scope.addingComment = false;
-							$scope.digest();
+							$scope.$apply();
 						};
 
 						$scope.addingComment = false;
