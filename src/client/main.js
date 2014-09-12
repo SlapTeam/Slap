@@ -5,7 +5,7 @@
 
 		$scope.menuOpen = true;
 		$scope.selectedSlap = null;
-		$scope.availableSlaps = [{ 
+		$scope.availableSlaps = [{
 			name: 'Test Slap 1',
 			pages: [{
 				title: 'Page 1',
@@ -42,7 +42,7 @@
 		chrome.runtime.onMessage.addListener(function (request, sender, respond) {
 			if(!request) return;
 
-			switch(request.type) { 
+			switch(request.type) {
 				case 'toggle': $scope.menuOpen = request.value; break;
 			}
 
