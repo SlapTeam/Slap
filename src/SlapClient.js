@@ -23,6 +23,7 @@ var clientCssFiles = [
 function SlapClient(tab) {
 	this.tab = tab;
 	this.visible = false;
+	this.selectedSlapId = null;
 }
 
 SlapClient.prototype = {
@@ -55,7 +56,7 @@ SlapClient.prototype = {
 		});
 	},
 
-	toggle: function(visible) {
+	toggleMenu: function(visible) {
 		if(visible === undefined) {
 			visible = !this.visible;
 		}
@@ -63,8 +64,17 @@ SlapClient.prototype = {
 		this.visible = visible;
 
 		chrome.tabs.sendMessage(this.tab.id, {
-			type: 'toggle',
+			type: 'togglemenu',
 			value: visible
+		});
+	},
+
+	selectSlap: function(id) { 
+		chrome.tabs.sendMessage(this.tab.id, { 
+			type: 'selectslap',
+			value: id
+		}, function(response) { 
+			client.selectedSlapId = response.value;
 		});
 	}
 };

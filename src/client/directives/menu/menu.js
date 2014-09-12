@@ -20,6 +20,13 @@
                     if($scope.onCreate)
                         $scope.onCreate();
                 };
+                $scope.close = function() { 
+                    $scope.open = false;
+                    chrome.runtime.sendMessage({
+                        type: "closemenu",
+                        context: slap
+                    });
+                };
         	}
     	};
 	}]);

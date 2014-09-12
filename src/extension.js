@@ -11,11 +11,11 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 		client = clients[tab.id] = new SlapClient(tab);
 		client.init(function() {
 			// display the menu once it's ready
-			client.toggle(true);
+			client.toggleMenu(true);
 		});
 	} else {
 		// toggle the menu
-		client.toggle();
+		client.toggleMenu();
 	}
 });
 
@@ -25,8 +25,11 @@ chrome.runtime.onMessage.addListener(function(message, sender, respond){
 
 	switch(message.type) {
 		case 'closemenu':
-		clients[message.context.tab].visible = false;
-		break;
+			clients[message.context.tab].visible = false;
+			break;
+		case 'selectslap':
+			clients[message.context.tab].selectedSlapId = message.value
+			break;
 	}
 });
 
@@ -40,7 +43,10 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo) {
     	if(client) {
     		client.init(function() {
     			if(client.visible) {
-    				client.toggle(true);
+    				client.toggleMenu(true);
+    			}
+    			if(client.selectedSlapId) { 
+    				client.selectSlap(selectedSlapId);
     			}
     		});
     	}

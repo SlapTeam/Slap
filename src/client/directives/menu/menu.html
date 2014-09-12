@@ -1,14 +1,24 @@
 <div class="slap-menu" ng-class="{open:open}">
+	<div>
+		<a href="" ng-click="close()">Close</a>
+	</div>
 	<nav>
 	    <ul>
 	        <li ng-repeat="item in availableSlaps">
 	        	<a href="" ng-click="select(item)">{{item.name}}</a>
+	        	<div ng-if="item == selectedSlap">
+	        		<ul>
+	        			<li ng-repeat="page in item.pages">
+	        				<a href="{{page.href}}">{{page.title}}</a>
+	        			</li>
+	        		</ul>
+	        	</div>
 	        </li>
 	    </ul>
 	</nav>
 	<div class="slap-create">
 		<a href="" ng-click="create()">
-			<span class="icon">+</span> Create New Slap
+			Create New Slap
 		</a>
 	</div>
 </div>

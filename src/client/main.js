@@ -38,12 +38,28 @@
 			$scope.selectedSlap = slap;
 		};
 
+		// watch for selected slap changes, to notify extension
+		$scope.$watch('selectedSlap', function(val) { 
+			chrome.runtime.sendMessage({
+            	type: "selectslap",
+            	context: slap,
+            	value: (val ? val.id : null)
+            });
+		});
+
 		// setup chrome message handler
 		chrome.runtime.onMessage.addListener(function (request, sender, respond) {
 			if(!request) return;
 
 			switch(request.type) {
-				case 'toggle': $scope.menuOpen = request.value; break;
+				case 'togglemenu': $scope.menuOpen = request.value; break;
+				case 'selectslap':
+					var target = _.find($scope.availableSlaps, {id: request.value});
+					if(target) { 
+						$scope.selectedSlap = target;
+						respond(request);
+					} else response({value: null});
+					break;
 			}
 
 			$scope.$digest();

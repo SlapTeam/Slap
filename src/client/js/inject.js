@@ -11,11 +11,6 @@
 		    	var slapRoot = $(data);
 		    	$('body').append(slapRoot);
 		    	angular.bootstrap(slapRoot, [slap.app.name]);
-
-		    	// $('.close-menu').click(function() {
-		    	// 	toggleMenu(false);
-		    	// 	chrome.runtime.sendMessage({type: "closemenu", context: slap});
-		    	// });
 		    },
 		    dataType: 'html'
 		});
