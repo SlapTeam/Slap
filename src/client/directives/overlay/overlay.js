@@ -66,26 +66,26 @@
 										$scope.selectedSlap.pages = [];
 									}
 
+									var selectors = [];
 									if (!_.any($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; }))
 									{
-										$scope.selectors = [];
 										$scope.selectedSlap.pages.push({
 											href: currentUrl,
 											title: document.title,
-											selectors: $scope.selectors
+											selectors: selectors
 										});
 									}
 									else {
-										$scope.selectors = _.find($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; }).selectors;
+										selectors = _.find($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; }).selectors;
 									}
 
-									if (!$scope.selectors[selector]) {
-										$scope.selectors.push({
+									if (!selectors[selector]) {
+										selectors.push({
 											selector: selector,
 											comments: []
 										});
 									}
-									var comments = _.find($scope.selectors, function(s) { return s.selector == selector }).comments;
+									var comments = _.find(selectors, function(s) { return s.selector == selector }).comments;
 									comments.push(comment);
 									addComment(selector, comment);
 									threads[selector].find('.slp_count').text(comments.length);
@@ -228,8 +228,7 @@
 								if (!value.pages) value.pages = [];
 								var pages = _.find($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; });
 								if (pages) {
-									$scope.selectors = pages.selectors;
-                	_.forEach($scope.selectors, function(value) {
+                	_.forEach(pages.selectors, function(value) {
 										if (threads[value.selector]) {
 											threads[value.selector].find('li').remove();
 											_.forEach(value.comments, function(c) {
