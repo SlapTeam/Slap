@@ -7,43 +7,24 @@
 		$scope.selectedSlap = null;
 		$scope.availableSlaps = fbutil.syncArray('slaps');
 
-		t = [{
-			name: 'Test Slap 1',
-			pages: [{
-				title: 'Page 1',
-				href: '/page1',
-				comments: {
-    				'#c1': [{
-        				email: 'kim.eberz@rightscale.com',
-        				date: new Date(),
-        				text: 'Need more poneys!'
-      				},{
-        				email: 'andre.rieussec@rightscale.com',
-        				date: new Date(),
-        				text: 'No more poneys!!!'
-      				}],
-    				'#c2': [{
-        				email: 'jasonmelgoza@gmail.com',
-        				date: new Date(),
-        				text: 'I want an  animated GIF'
-      				}]
-				}
-			}]
-		}];
-
 		$scope.createVisible = false;
 		$scope.showCreate = function() {
 			$scope.createVisible = true;
 		};
 		$scope.createSlap = function(slap) {
-			//$scope.availableSlaps[Math.round(Math.random() * 10000)] = slap;
 			$scope.availableSlaps.$add(slap);
 			$scope.availableSlaps.$save();
 			$scope.selectedSlap = slap;
 		};
 
 		// watch for selected slap changes, to notify extension
+		var initialWatch = true;
 		$scope.$watch('selectedSlap', function(val) {
+			if(initialWatch) { 
+				initialWatch = false;
+				return;
+			}
+
 			chrome.runtime.sendMessage({
             	type: "selectslap",
             	context: slap,
@@ -59,14 +40,17 @@
 		chrome.runtime.onMessage.addListener(function (request, sender, respond) {
 			if(!request) return;
 
+			console.log('client message', request);
 			switch(request.type) {
 				case 'togglemenu': $scope.menuOpen = request.value; break;
 				case 'selectslap':
-					var target = _.find($scope.availableSlaps, {"$id": request.value});
-					if(target) {
-						$scope.selectedSlap = target;
-						respond(request);
-					} else response({value: null});
+					$scope.availableSlaps.$loaded().then(function() {
+						var target = _.find($scope.availableSlaps, {"$id": request.value});
+						if(target) {
+							$scope.selectedSlap = target;
+							respond(request);
+						} else respond({value: null});
+					});
 					break;
 			}
 
