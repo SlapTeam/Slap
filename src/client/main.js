@@ -1,11 +1,13 @@
 
 (function(slap){
 	// slap controller
-	slap.app.controller('SlapCtrl', ['$scope', function($scope) {
+	slap.app.controller('SlapCtrl', ['$scope', 'fbutil', '$firebase', function($scope, fbutil, $firebase) {
 
 		$scope.menuOpen = true;
 		$scope.selectedSlap = null;
-		$scope.availableSlaps = [{
+		$scope.availableSlaps = fbutil.syncArray('slaps');
+
+		t = [{
 			name: 'Test Slap 1',
 			pages: [{
 				title: 'Page 1',
@@ -34,7 +36,9 @@
 			$scope.createVisible = true;
 		};
 		$scope.createSlap = function(slap) {
-			// TODO: save it somewhere
+			//$scope.availableSlaps[Math.round(Math.random() * 10000)] = slap;
+			$scope.availableSlaps.$add(slap);
+			$scope.availableSlaps.$save();
 			$scope.selectedSlap = slap;
 		};
 
@@ -46,6 +50,10 @@
             	value: (val ? val.$id : null)
             });
 		});
+
+		$scope.save = function(item) {
+			$scope.availableSlaps.$save(item);
+		};
 
 		// setup chrome message handler
 		chrome.runtime.onMessage.addListener(function (request, sender, respond) {

@@ -1,14 +1,17 @@
 
 (function(slap){
 
-	slap.app.directive('slapOverlay', ['$sce', function ($sce) {
+	slap.app.directive('slapOverlay', ['$sce', '$location', function ($sce, $location) {
     	return {
         	restrict: 'E',
         	templateUrl: $sce.trustAsResourceUrl(chrome.extension.getURL('client/directives/overlay/overlay.html')),
         	scope: {
-            	selectedSlap: '='
+            	selectedSlap: '=',
+							onChange: '='
             },
         	link: function ($scope, element, attrs) {
+
+						var currentUrl = $location.absUrl();
 
 						var threads = {};
 
@@ -44,20 +47,45 @@
 								else {
 									var selector = $(e.target).closest('.slp_comment').data('slp-id');
 
+									var date = new Date();
+
 									var comment = {
 										email: window.slap.user.email,
-										date: new Date(),
+										date: date.toLocaleDateString() + ' ' + date.toLocaleTimeString(),
 										text: e.target.value
 									};
 
-									if (!$scope.selectedSlap[selector]) {
-										$scope.selectedSlap[selector] = []
+									if (!$scope.selectedSlap.pages)
+									{
+										$scope.selectedSlap.pages = [];
 									}
-									$scope.selectedSlap[selector].push(comment);
+
+									if (!_.any($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; }))
+									{
+										$scope.selectors = [];
+										$scope.selectedSlap.pages.push({
+											href: currentUrl,
+											title: document.title,
+											selectors: $scope.selectors
+										});
+									}
+									else {
+										$scope.selectors = _.find($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; }).selectors;
+									}
+
+									if (!$scope.selectors[selector]) {
+										$scope.selectors.push({
+											selector: selector,
+											comments: []
+										});
+									}
+									var comments = _.find($scope.selectors, function(s) { return s.selector == selector }).comments;
+									comments.push(comment);
 									addComment(selector, comment);
-									threads[selector].find('.slp_count').text($scope.selectedSlap[selector].length);
+									threads[selector].find('.slp_count').text(comments.length);
 									e.target.value = '';
 									e.target.blur();
+									$scope.onChange($scope.selectedSlap);
 								}
 								e.preventDefault();
 							}
@@ -70,7 +98,7 @@
 								html += '<img src="http://www.gravatar.com/avatar/' + hash + '" />';
 							}
 							html += '<strong>' + (comment.email || 'Anonymous') + '</strong>' +
-											'<span>' + comment.date.toLocaleDateString() + ' ' + comment.date.toLocaleTimeString() + '</span>' +
+											'<span>' + comment.date || '' + '</span>' +
 											'</div><div>' + comment.text.replace('\n', '<br />') + '</div></li>';
 
 							threads[selector].find('ul').append(html);
@@ -190,8 +218,13 @@
 						});
 
             $scope.$watch('selectedSlap', function(value) {
-								if (!value) $scope.selectedSlap = {};
-                _.forEach(value, function(value,key) { addThread(key, value, false); });
+								if (!value) return;
+								if(!value.pages) value.pages = [];
+								var pages = _.find($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; });
+								if (pages) {
+									$scope.selectors = pages.selectors;
+                	_.forEach($scope.selectors, function(value) { addThread(value.selector, value.comments, false); });
+								}
             });
 
 						function addClickHandler(e) {

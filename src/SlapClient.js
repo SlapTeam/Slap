@@ -7,6 +7,7 @@ var clientJsFiles = [
 	'client/js/lib/firebase.js',
 	'client/js/lib/firebase.utils.js',
 	'client/js/lib/config.js',
+	'client/js/lib/angularfire.min.js',
 	'client/js/init.js',
 	'client/directives/menu/menu.js',
 	'client/directives/overlay/overlay.js',
