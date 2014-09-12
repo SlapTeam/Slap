@@ -23,6 +23,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 chrome.runtime.onMessage.addListener(function(message, sender, respond){
 	if(!message || !message.context) return;
 
+	console.log('extension message: ', message);
 	switch(message.type) {
 		case 'closemenu':
 			clients[message.context.tab].visible = false;
@@ -46,7 +47,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo) {
     				client.toggleMenu(true);
     			}
     			if(client.selectedSlapId) { 
-    				client.selectSlap(selectedSlapId);
+    				client.selectSlap(client.selectedSlapId);
     			}
     		});
     	}

@@ -9,6 +9,7 @@
     z-index: 9999;
     background-color: #67b5d1;
     overflow: hidden;
+    text-align: left;
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     -ms-transition: all 0.3s;
@@ -29,7 +30,7 @@
 
 .slap-menu li {
     display: block;
-    text-align: center;
+    padding-left:10px;
     border-bottom: solid 1px #3184a1;
     border-top: solid 1px #b5dbe9;
 }
