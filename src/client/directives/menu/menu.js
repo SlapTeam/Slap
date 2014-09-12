@@ -8,12 +8,18 @@
         	scope: {
             	availableSlaps: '=',
             	selectedSlap: '=',
-            	open: '='
+            	open: '=',
+                onCreate: '='
             },
         	link: function ($scope, element, attrs) { 
         		$scope.select = function(item) {
 					$scope.selectedSlap = item;
 				};
+
+                $scope.create = function() { 
+                    if($scope.onCreate)
+                        $scope.onCreate();
+                };
         	}
     	};
 	}]);

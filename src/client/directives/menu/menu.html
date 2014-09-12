@@ -1,7 +1,14 @@
-<nav class="slap-menu" ng-class="{open:open}">
-    <ul>
-        <li ng-repeat="item in availableSlaps">
-        	<a href="" ng-click="select(item)">{{item.name}}</a>
-        </li>
-    </ul>
-</nav>
+<div class="slap-menu" ng-class="{open:open}">
+	<nav>
+	    <ul>
+	        <li ng-repeat="item in availableSlaps">
+	        	<a href="" ng-click="select(item)">{{item.name}}</a>
+	        </li>
+	    </ul>
+	</nav>
+	<div class="slap-create">
+		<a href="" ng-click="create()">
+			<span class="icon">+</span> Create New Slap
+		</a>
+	</div>
+</div>

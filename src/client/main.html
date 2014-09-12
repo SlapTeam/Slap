@@ -1,9 +1,14 @@
 <div ng-controller="SlapCtrl">
 	<slap-menu
 		open="menuOpen"
+		on-create="showCreate"
 		available-slaps="availableSlaps"
 		selected-slap="selectedSlap">
 	</slap-menu>
 	<slap-overlay selected-slap="selectedSlap">
 	</slap-overlay>
+	<slap-create
+		visible="createVisible"
+		on-created="createSlap">
+	</slap-create>
 </div>

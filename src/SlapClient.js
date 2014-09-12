@@ -5,13 +5,15 @@ var clientJsFiles = [
 	'client/js/init.js',
 	'client/directives/menu/menu.js',
 	'client/directives/overlay/overlay.js',
+	'client/directives/create/create.js',
 	'client/main.js',
 	'client/js/inject.js'
 ];
 
 // slap client styles
 var clientCssFiles = [
-	'client/css/menu.css'
+	'client/css/menu.css',
+	'client/css/modal.css'
 ];
 
 // slap client class

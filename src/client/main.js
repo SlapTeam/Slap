@@ -29,6 +29,15 @@
 			}]
 		}];
 
+		$scope.createVisible = false;
+		$scope.showCreate = function() { 
+			$scope.createVisible = true;
+		};
+		$scope.createSlap = function(slap) { 
+			// TODO: save it somewhere
+			$scope.selectedSlap = slap;
+		};
+
 		// setup chrome message handler
 		chrome.runtime.onMessage.addListener(function (request, sender, respond) {
 			if(!request) return;
