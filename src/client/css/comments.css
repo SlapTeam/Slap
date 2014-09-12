@@ -63,6 +63,7 @@
 }
 
 .slp_popup ul li {
+  list-style: none;
   font-size: 16px;
   font-weight: normal;
   margin-bottom: 20px;
