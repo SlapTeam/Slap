@@ -225,13 +225,21 @@
 
             $scope.$watch('selectedSlap', function(value) {
 								if (!value) return;
-								if(!value.pages) value.pages = [];
+								if (!value.pages) value.pages = [];
 								var pages = _.find($scope.selectedSlap.pages, function(p) { return p.href == currentUrl; });
 								if (pages) {
 									$scope.selectors = pages.selectors;
-                	_.forEach($scope.selectors, function(value) { addThread(value.selector, value.comments, false); });
+                	_.forEach($scope.selectors, function(value) {
+										if (threads[value.selector]) {
+											threads[value.selector].find('li').remove();
+											_.forEach(value.comments, function(c) {
+												addComment(value.selector, c);
+											});
+										}
+										else addThread(value.selector, value.comments, false);
+									});
 								}
-            });
+            }, true);
 
 						function addClickHandler(e) {
 							if ($(e.target).closest('.slap-ui').length) return;
