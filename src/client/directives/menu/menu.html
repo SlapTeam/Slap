@@ -6,6 +6,7 @@
 	    <ul>
 	        <li ng-repeat="item in availableSlaps">
 	        	<a href="" ng-class="{selected:item == selectedSlap}" ng-click="select(item)">{{item.name}}</a>
+				<a href="" ng-if="item.owner == slap.user.email" ng-click="remove(item)">(x) Remove</a>
 	        	<div ng-if="item == selectedSlap">
 	        		<ul>
 	        			<li ng-repeat="page in item.pages">
