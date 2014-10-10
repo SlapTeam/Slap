@@ -1,0 +1,36 @@
+{
+
+  "name": "Slap",
+  "version": "0.1",
+  "description": "Share ideas in your web app.",
+  "manifest_version": 2,
+  "icons": { "16": "icons/slap16.png",
+             "48": "icons/slap48.png",
+            "128": "icons/slap128.png" },
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/slap19.png",
+      "38": "icons/slap38.png"
+    },
+    "default_title": "Slap!"
+  },
+  "background": {
+    "scripts": [
+      "clientScripts.js",
+      "SlapClient.js",
+      "extension.js"
+    ]
+  },
+  "web_accessible_resources": [
+    "client/*",
+    "client/**/*"
+  ],
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "identity",
+    "identity.email",
+    "http://*/*",
+    "https://*/*"
+  ]
+}

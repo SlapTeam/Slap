@@ -3,8 +3,7 @@
   "version": "0.0.1",
   "description": "A chrome extension for adding comments to web pages.",
   "main": "",
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/Ventajou/Slap.git"
@@ -14,5 +13,14 @@
   "bugs": {
     "url": "https://github.com/Ventajou/Slap/issues"
   },
-  "homepage": "https://github.com/Ventajou/Slap"
+  "homepage": "https://github.com/Ventajou/Slap",
+  "dependencies": {
+    "del": "^0.1.3",
+    "glob": "^4.0.6",
+    "gulp": "^3.8.8",
+    "gulp-flatten": "0.0.3",
+    "lodash": "^2.4.1",
+    "main-bower-files": "^2.1.0",
+    "minimatch": "^1.0.0"
+  }
 }
