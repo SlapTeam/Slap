@@ -1,0 +1,23 @@
+  <div class="modal-header">
+      <h3 class="modal-title">Create a New Slap</h3>
+  </div>
+  <div class="modal-body">
+    <form>
+    	<div class="form-group">
+    		<label for="slapName">Slap Name</label>
+    		<div>
+    			<input type="text" name="slapName" id="slapName" ng-model="slap.name" />
+    		</div>
+    	</div>
+    	<div class="form-group">
+    		<label for="slapOwner">Slap Owner</label>
+    		<div>
+    			<input type="text" name="slapOwner" id="slapOwner" ng-model="slap.owner" />
+    		</div>
+    	</div>
+    </form>
+  </div>
+  <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="save()">OK</button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+  </div>

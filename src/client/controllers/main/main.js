@@ -1,21 +1,13 @@
 
 (function(slap){
 	// slap controller
-	slap.app.controller('SlapCtrl', ['$scope', 'fbutil', '$firebase', function($scope, fbutil, $firebase) {
+	slap.app.controller('SlapCtrl', function($scope, fbutil, $firebase) {
 
 		$scope.menuOpen = true;
 		$scope.selectedSlap = null;
 		$scope.availableSlaps = fbutil.syncArray('slaps');
 
 		$scope.createVisible = false;
-		$scope.showCreate = function() {
-			$scope.createVisible = true;
-		};
-		$scope.createSlap = function(slap) {
-			$scope.availableSlaps.$add(slap);
-			$scope.availableSlaps.$save();
-			$scope.selectedSlap = slap;
-		};
 
 		// watch for selected slap changes, to notify extension
 		var initialWatch = true;
@@ -56,6 +48,6 @@
 
 			$scope.$digest();
 		});
-	}]);
+	});
 
 }(window.slap));

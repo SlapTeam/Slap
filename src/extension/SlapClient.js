@@ -1,8 +1,6 @@
 // slap client styles
 var clientCssFiles = [
-	'client/css/menu.css',
-	'client/css/modal.css',
-	'client/css/comments.css'
+	'client/css/slap.css'
 ];
 
 // slap client class

@@ -1,0 +1,78 @@
+$icon-font-path: 'chrome-extension://__MSG_@@extension_id__/client/fonts/';
+
+@import '../../../bower_components/bootstrap-sass/lib/_variables';
+@import '../../../bower_components/bootstrap-sass/lib/_mixins';
+@import '../../../bower_components/bootstrap-sass/lib/_glyphicons';
+.slap-ui {
+  // Reset
+  @import "../../../bower_components/bootstrap-sass/lib/_normalize";
+  @import "../../../bower_components/bootstrap-sass/lib/_print";
+
+  // Core CSS
+  @import "../../../bower_components/bootstrap-sass/lib/_scaffolding";
+  @import "../../../bower_components/bootstrap-sass/lib/_type";
+  @import "../../../bower_components/bootstrap-sass/lib/_code";
+  @import "../../../bower_components/bootstrap-sass/lib/_grid";
+  @import "../../../bower_components/bootstrap-sass/lib/_tables";
+  @import "../../../bower_components/bootstrap-sass/lib/_forms";
+  @import "../../../bower_components/bootstrap-sass/lib/_buttons";
+
+  // Components
+  @import "../../../bower_components/bootstrap-sass/lib/_component-animations";
+  @import "../../../bower_components/bootstrap-sass/lib/_glyphicons";
+  @import "../../../bower_components/bootstrap-sass/lib/_dropdowns";
+  @import "../../../bower_components/bootstrap-sass/lib/_button-groups";
+  @import "../../../bower_components/bootstrap-sass/lib/_input-groups";
+  @import "../../../bower_components/bootstrap-sass/lib/_navs";
+  @import "../../../bower_components/bootstrap-sass/lib/_navbar";
+  @import "../../../bower_components/bootstrap-sass/lib/_breadcrumbs";
+  @import "../../../bower_components/bootstrap-sass/lib/_pagination";
+  @import "../../../bower_components/bootstrap-sass/lib/_pager";
+  @import "../../../bower_components/bootstrap-sass/lib/_labels";
+  @import "../../../bower_components/bootstrap-sass/lib/_badges";
+  @import "../../../bower_components/bootstrap-sass/lib/_jumbotron";
+  @import "../../../bower_components/bootstrap-sass/lib/_thumbnails";
+  @import "../../../bower_components/bootstrap-sass/lib/_alerts";
+  @import "../../../bower_components/bootstrap-sass/lib/_progress-bars";
+  @import "../../../bower_components/bootstrap-sass/lib/_media";
+  @import "../../../bower_components/bootstrap-sass/lib/_list-group";
+  @import "../../../bower_components/bootstrap-sass/lib/_panels";
+  @import "../../../bower_components/bootstrap-sass/lib/_wells";
+  @import "../../../bower_components/bootstrap-sass/lib/_close";
+
+  // Components w/ JavaScript
+  @import "../../../bower_components/bootstrap-sass/lib/_modals";
+  @import "../../../bower_components/bootstrap-sass/lib/_tooltip";
+  @import "../../../bower_components/bootstrap-sass/lib/_popovers";
+  @import "../../../bower_components/bootstrap-sass/lib/_carousel";
+
+  // Utility classes
+  @import "../../../bower_components/bootstrap-sass/lib/_utilities";
+  @import "../../../bower_components/bootstrap-sass/lib/_responsive-utilities";
+  @import '../../../bower_components/bootstrap-sass/lib/bootstrap';
+
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  background-color: $body-bg;
+
+  a:visited {
+    color: $link-color;
+  }
+}
+@import 'modules/_comments';
+@import 'modules/_menu';
+
+.slap-ui.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: ($zindex-modal-background - 10);
+  background-color: $modal-backdrop-bg;
+  // Fade for backdrop
+  &.fade { @include opacity(0); }
+  &.in { @include opacity(.5); }
+}

@@ -15,12 +15,17 @@
     "tests"
   ],
   "dependencies": {
-    "angularfire": "~0.8.2",
+    "angularfire": "~0.9",
     "jquery": "~2.1.1",
     "lodash": "~2.4.1",
-    "angular": "~1.2.26"
+    "angular": "~1.2",
+    "bootstrap-sass": "~3.0.2",
+    "angular-bootstrap": "~0.12.0"
   },
   "overrides": {
+    "bootstrap-sass": {
+      "main": []
+    },
     "mockfirebase": []
   }
 }

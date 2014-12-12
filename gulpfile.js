@@ -8,6 +8,7 @@ var gulp          = require('gulp'),
     fs            = require('fs'),
     path          = require('path'),
     minimatch     = require('minimatch'),
+    sass          = require('gulp-sass'),
     bowerFiles    = require('main-bower-files');
 
 // Can filter and sort an array of files based on an array of globbing patterns
@@ -39,14 +40,20 @@ gulp.task('client-scripts', ['clean'], function() {
     .pipe(gulp.dest('dist/client'));
 });
 
-gulp.task('client-styles', ['clean'], function() {
-  return gulp.src('src/client/**/*.css')
-    .pipe(gulp.dest('dist/client'));
-})
-
 gulp.task('extension', ['clean'], function() {
   return gulp.src('src/extension/**/*')
     .pipe(gulp.dest('dist'));
+});
+
+gulp.task('client-styles', ['clean'], function() {
+  return gulp.src('src/client/styles/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('dist/client/css'));
+});
+
+gulp.task('client-fonts', ['clean'], function() {
+  return gulp.src('bower_components/bootstrap-sass/fonts/*')
+    .pipe(gulp.dest('dist/client/fonts'));
 });
 
 gulp.task('script-list', ['lib', 'client-scripts'], function(cb) {
@@ -76,7 +83,7 @@ gulp.task('script-list', ['lib', 'client-scripts'], function(cb) {
     cb);
 });
 
-gulp.task('build', ['script-list', 'client-styles', 'extension']);
+gulp.task('build', ['script-list', 'client-styles', 'client-fonts', 'extension']);
 
 gulp.task('default', ['build'], function() {
   gulp.watch(['src/**/*'], ['build']);

@@ -5,10 +5,10 @@
 
 .slp_comment {
   position: absolute;
+  z-index: 1000;
 }
 
 .slp_comment .slp_token {
-  z-index: 1000;
   box-sizing: content-box;
   left: 50%;
   background: #C32525;

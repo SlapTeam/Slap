@@ -1,26 +1,43 @@
 <div class="slap-menu" ng-class="{open:open}">
-	<div>
-		<a href="" ng-click="close()">Close</a>
-	</div>
-	<nav>
-	    <ul>
-	        <li ng-repeat="item in availableSlaps">
-	        	<a href="" ng-class="{selected:item == selectedSlap}" ng-click="select(item)">{{item.name}}</a>
-				<a href="" ng-if="item.owner == slap.user.email" ng-click="remove(item)">(x) Remove</a>
-	        	<div ng-if="item == selectedSlap">
-	        		<ul>
-	        			<li ng-repeat="page in item.pages">
-	        				<a href="{{page.href}}">{{page.title}}</a>
-	        			</li>
-	        		</ul>
-	        	</div>
-	        </li>
-	    </ul>
+
+	<nav class="navbar navbar-default" role="navigation">
+  	<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Slap!</a>
+			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<a href="#" ng-click="close()" class="navbar-link"><span class="glyphicon glyphicon-remove"></span></a>
+				</li>
+			</ul>
+		</div>
 	</nav>
-	<div class="slap-create">
-		<a href="" ng-click="create()">
-			Create New Slap
-		</a>
+
+<div class="menu-content">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-6">
+				<h4>Your slaps</h4>
+			</div>
+			<div class="col-xs-6">
+				<button class="btn btn-primary btn-small pull-right" ng-click="create()"><span class="glyphicon glyphicon-plus"></span> New</button>
+			</div>
+		</div>
+				<accordion close-others="'true'">
+					<accordion-group ng-repeat="item in availableSlaps">
+						<accordion-heading>
+			      	{{item.name}}
+							<a href="" ng-if="item.owner == slap.user.email" ng-click="remove(item)" class="pull-right"><span class="glyphicon glyphicon-remove-sign"></span></a>
+						</accordion-heading>
+		      		<ul class="nav nav-pills">
+		      			<li ng-repeat="page in item.pages">
+		      				<a href="{{page.href}}">{{page.title}}</a>
+		      			</li>
+		      		</ul>
+					</accordion-group>
+				</accordion>
+
+		</div>
 	</div>
 	<slap-overlay selected-slap="selectedSlap" on-change="$parent.save">
 	</slap-overlay>
